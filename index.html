@@ -1,26 +1,30 @@
-<div class="cat-age-app">
-  <h1>🐾 貓咪歲數計算器</h1>
-
-  <p class="subtitle">輸入貓咪的生日，看看牠現在幾歲吧！</p>
-
-  <div class="input-area">
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🐾 貓咪歲數計算器</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>🐱 貓咪歲數計算器</h1>
+    <p class="subtitle">輸入貓咪的生日，看看牠現在幾歲 🐾</p>
+    
     <label for="birthday">貓咪生日：</label>
-    <input type="date" id="birthday">
-    <button id="calcBtn">開始計算</button>
+    <input type="date" id="birthday" aria-label="貓咪生日">
+    
+    <button id="calculate">開始計算</button>
+
+    <div id="result" class="result" aria-live="polite"></div>
+
+    <p class="source">
+      文獻來源：<br>
+      - American Association of Feline Practitioners (AAFP) <br>
+      - 猫咪年齡換算公式: 第一歲等於 15 人類歲，第二歲等於 24 人類歲，此後每歲加 4 人類歲。
+    </p>
   </div>
 
-  <!-- 結果區塊 -->
-  <div id="result" class="result hidden">
-    <h2>📘 計算結果</h2>
-
-    <p id="realAge" class="age-line"></p>
-    <p id="humanAge" class="age-line"></p>
-
-    <div class="source">
-      <strong>📚 人貓換算歲數文獻來源：</strong><br>
-      - Farnworth, M.J., et al. (2013). *Comparing human and cat aging patterns. Feline Medicine Review.*<br>
-      - 美國獸醫協會（AVMA）與英國 RSPCA 貓齡換算參考表。
-    </div>
-  </div>
-
-  <img class="cat-img" src="https:
+  <script src="script.js"></script>
+</body>
+</html>

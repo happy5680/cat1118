@@ -1,74 +1,40 @@
 body {
-  font-family: "Microsoft JhengHei", sans-serif;
-  background: #fff6e9;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: #fff0f5;
+  color: #333;
   display: flex;
   justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+.container {
+  background: #ffe4e1;
   padding: 30px;
-}
-
-.cat-age-app {
-  background: #ffffff;
-  padding: 25px 30px;
-  border-radius: 16px;
-  width: 360px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
   text-align: center;
+  width: 90%;
+  max-width: 400px;
 }
 
-h1 {
-  margin-bottom: 10px;
-  color: #d47b43;
+h1 { margin-bottom: 10px; font-size: 2rem; color: #ff69b4; }
+.subtitle { margin-bottom: 20px; font-size: 1rem; color: #666; }
+label { display: block; margin-bottom: 5px; font-weight: bold; }
+input[type="date"] {
+  padding: 8px; width: 100%; margin-bottom: 15px;
+  border-radius: 8px; border: 1px solid #ccc; font-size: 1rem;
 }
-
-.subtitle {
-  color: #444;
-  margin-bottom: 20px;
-}
-
-.input-area {
-  margin-bottom: 20px;
-}
-
-.input-area input[type="date"] {
-  padding: 6px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-}
-
 button {
-  padding: 7px 15px;
-  margin-left: 8px;
-  background: #ffb26b;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: 0.2s;
+  background-color: #ff69b4; color: white;
+  padding: 10px 20px; border: none; border-radius: 12px;
+  cursor: pointer; font-size: 1rem; transition: 0.3s;
 }
-
-button:hover {
-  background: #ffa041;
-}
-
+button:hover { background-color: #ff1493; }
 .result {
-  background: #fff1d8;
-  padding: 15px;
-  border-radius: 10px;
-  margin-top: 20px;
-  text-align: left;
+  margin-top: 20px; font-size: 1.2rem;
+  background: #fff0f5; padding: 15px;
+  border-radius: 12px; border: 1px solid #ffb6c1;
 }
-
-.hidden {
-  display: none;
-}
-
-.age-line {
-  font-size: 16px;
-  margin: 5px 0;
-}
-
-.cat-img {
-  width: 100%;
-  margin-top: 20px;
-  border-radius: 10px;
-}
+.source { margin-top: 20px; font-size: 0.8rem; color: #555; text-align: left; }
