@@ -1,45 +1,81 @@
-// 初始化：如果 localStorage 有生日 → 自動填入
-window.addEventListener("DOMContentLoaded", () => {
-  const savedBirthday = localStorage.getItem("catBirthday");
-  if (savedBirthday) {
-    document.getElementById("birthday").value = savedBirthday;
-  }
+// ----------------------------------------------
+// 🐱 貓咪歲數計算主功能
+// ----------------------------------------------
+function calculateCatAge(birthday) {
+    const birthDate = new Date(birthday);
+    const today = new Date();
+
+    const diffTime = today - birthDate;
+    const realAge = diffTime / (1000 * 60 * 60 * 24 * 365.25); // 取年齡（含小數）
+    const realAgeFixed = realAge.toFixed(2);
+
+    let humanAge;
+
+    // 📚 人貓換算標準（文獻：AAFP、UC Davis Vet）：
+    // 第 1 年 = 15 人類歲
+    // 第 2 年 = 24 人類歲
+    // 之後每年 + 4
+    if (realAge <= 1) {
+        humanAge = 15;
+    } else if (realAge <= 2) {
+        humanAge = 24;
+    } else {
+        humanAge = 24 + (realAge - 2) * 4;
+    }
+
+    return {
+        realAge: realAgeFixed,
+        humanAge: Math.round(humanAge)
+    };
+}
+
+// ----------------------------------------------
+// 🐱 Page 加載時：載入 localStorage
+// ----------------------------------------------
+document.addEventListener("DOMContentLoaded", () => {
+    const savedBirthday = localStorage.getItem("catBirthday");
+    const savedRealAge = localStorage.getItem("realAge");
+    const savedHumanAge = localStorage.getItem("humanAge");
+
+    // 1️⃣ 載入生日
+    if (savedBirthday) {
+        document.getElementById("birthday").value = savedBirthday;
+    }
+
+    // 2️⃣ 載入上次的運算結果
+    if (savedRealAge) {
+        document.getElementById("realAge").textContent = savedRealAge;
+    }
+    if (savedHumanAge) {
+        document.getElementById("humanAge").textContent = savedHumanAge;
+    }
 });
 
-// 主要計算功能
+// ----------------------------------------------
+// 🐱 點擊計算按鈕後的行為
+// ----------------------------------------------
 document.getElementById("calcBtn").addEventListener("click", () => {
-  const birthdayInput = document.getElementById("birthday").value;
+    const birthday = document.getElementById("birthday").value;
 
-  if (!birthdayInput) {
-    alert("請先輸入貓咪生日！");
-    return;
-  }
+    if (!birthday) {
+        alert("請先輸入貓咪的生日喔！");
+        return;
+    }
 
-  // 儲存生日到 localStorage
-  localStorage.setItem("catBirthday", birthdayInput);
+    // 儲存生日
+    localStorage.setItem("catBirthday", birthday);
 
-  const birthday = new Date(birthdayInput);
-  const today = new Date();
+    // 計算歲數
+    const { realAge, humanAge } = calculateCatAge(birthday);
 
-  let ageInYears = (today - birthday) / (1000 * 60 * 60 * 24 * 365.25);
+    const realAgeText = `🐾 貓咪實際歲數：${realAge} 歲`;
+    const humanAgeText = `👨‍🦳 換算成人類歲數：約 ${humanAge} 歲`;
 
-  // 人貓換算標準（AVMA/RSPCA）
-  let humanAge = 0;
-  if (ageInYears <= 1) {
-    humanAge = 15 * ageInYears;
-  } else if (ageInYears <= 2) {
-    humanAge = 15 + (ageInYears - 1) * 9;
-  } else {
-    humanAge = 24 + (ageInYears - 2) * 4;
-  }
+    // 顯示在畫面
+    document.getElementById("realAge").textContent = realAgeText;
+    document.getElementById("humanAge").textContent = humanAgeText;
 
-  // 顯示於畫面
-  document.getElementById("realAge").textContent =
-    `🐱 貓咪實際年齡：約 ${ageInYears.toFixed(2)} 歲`;
-
-  document.getElementById("humanAge").textContent =
-    `👤 換算成人類約：${humanAge.toFixed(0)} 歲`;
-
-  // 移除 hidden → 顯示結果
-  document.getElementById("result").classList.remove("hidden");
+    // 儲存結果
+    localStorage.setItem("realAge", realAgeText);
+    localStorage.setItem("humanAge", humanAgeText);
 });
